@@ -274,7 +274,7 @@ TileServerOptions TileServerOptions::MapTilerConfiguration() {
                                     .withBaseURL("https://api.maptiler.com")
                                     .withUriSchemeAlias("maptiler")
                                     .withApiKeyParameterName("key")
-                                    .withSourceTemplate("/tiles{path}/tiles.json", "sources", {})
+                                    .withSourceTemplate("/maps{path}/tiles.json", "sources", {})
                                     .withStyleTemplate("/maps{path}/style.json", "maps", {})
                                     .withSpritesTemplate("/maps{path}", "sprites", {})
                                     .withGlyphsTemplate("/fonts{path}", "fonts", {})
