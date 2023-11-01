@@ -127,6 +127,11 @@ void Style::addLayer(std::unique_ptr<Layer> layer, const std::optional<std::stri
     impl->addLayer(std::move(layer), before);
 }
 
+void Style::moveLayer(const std::string& id, const std::optional<std::string>& before) {
+    impl->mutated = true;
+    impl->moveLayer(id, before);
+}
+
 std::unique_ptr<Layer> Style::removeLayer(const std::string& id) {
     impl->mutated = true;
     return impl->removeLayer(id);

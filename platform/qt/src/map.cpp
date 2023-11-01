@@ -1051,6 +1051,17 @@ bool Map::layerExists(const QString &id) {
 }
 
 /*!
+    Returns true if the layer with given \a id exists, false otherwise. The
+    layer will be moved underneath the layer specified by \a before. if
+    specified. Otherwise, it will be moved to the topmost layer.
+*/
+void Map::moveLayer(const QString& id, const QString& before) {
+    d_ptr->mapObj->getStyle().moveLayer(
+        id.toStdString(),
+        before.isEmpty() ? std::optional<std::string>() : std::optional<std::string>(before.toStdString()));
+}
+
+/*!
     Removes the layer with given \a id.
 */
 void Map::removeLayer(const QString &id) {

@@ -63,6 +63,7 @@ public:
     Layer* getLayer(const std::string& id) const;
 
     Layer* addLayer(std::unique_ptr<Layer>, const std::optional<std::string>& beforeLayerID = std::nullopt);
+    void moveLayer(const std::string& layerID, const std::optional<std::string>& beforeLayerID = std::nullopt);
     std::unique_ptr<Layer> removeLayer(const std::string& layerID);
 
     std::string getName() const;
