@@ -21,6 +21,9 @@ public:
 
     // mbgl::Scheduler implementation.
     void schedule(std::function<void()>&& function) final;
+    void schedule([[maybe_unused]] const mbgl::util::SimpleIdentity, std::function<void()>&& function) final {
+        schedule(std::move(function));
+    }
 
     void waitForEmpty(const mbgl::util::SimpleIdentity tag = mbgl::util::SimpleIdentity::Empty) override;
 
