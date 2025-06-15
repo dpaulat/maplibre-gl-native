@@ -371,7 +371,12 @@ platform::GLenum Enum<gfx::TexturePixelType>::to(const gfx::TexturePixelType val
         case gfx::TexturePixelType::RGBA:
             return GL_RGBA;
         case gfx::TexturePixelType::Alpha:
+#if !defined(__APPLE__)
             return GL_ALPHA;
+#else
+            // GL_ALPHA is not valid on Apple, GL_RED will be swizzled
+            return GL_RED;
+#endif
         case gfx::TexturePixelType::Stencil:
             return GL_STENCIL_INDEX;
         case gfx::TexturePixelType::Depth:

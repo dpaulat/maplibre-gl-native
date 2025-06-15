@@ -55,16 +55,23 @@ public:
 #if MLN_RENDER_BACKEND_OPENGL
             constexpr auto backend = gfx::Backend::Type::OpenGL;
 
+#if !defined(__APPLE__)
+            static constexpr std::string versionString = "#version 300 es\n";
+#else
+            // OpenGL ES 3.0 is not available using an OpenGL core profile on macOS
+            static constexpr std::string versionString = "#version 410\n";
+#endif
+
             // Compile the shader
             std::initializer_list<const char*> vertexSource = {
-                "#version 300 es\n",
+                versionString.c_str(),
                 programParameters.getDefinesString().c_str(),
                 additionalDefines.c_str(),
                 shaders::ShaderSource<shaders::BuiltIn::Prelude, backend>::vertex,
                 programParameters.vertexSource(gfx::Backend::Type::OpenGL).c_str()};
 
             std::initializer_list<const char*> fragmentSource = {
-                "#version 300 es\n",
+                versionString.c_str(),
                 programParameters.getDefinesString().c_str(),
                 additionalDefines.c_str(),
                 shaders::ShaderSource<shaders::BuiltIn::Prelude, backend>::fragment,

@@ -119,18 +119,25 @@ std::shared_ptr<ShaderProgramGL> ShaderProgramGL::create(
         context.getObserver().onPreCompileShader(
             programParameters.getProgramType(), gfx::Backend::Type::OpenGL, additionalDefines);
 
+#if !defined(__APPLE__)
+        static constexpr std::string versionString = "#version 300 es\n";
+#else
+        // OpenGL ES 3.0 is not available using an OpenGL core profile on macOS
+        static constexpr std::string versionString = "#version 410\n";
+#endif
+
         // throws on compile error
         auto vertProg = context.createShader(
             ShaderType::Vertex,
             std::initializer_list<const char*>{
-                "#version 300 es\n",
+                versionString.c_str(),
                 programParameters.getDefinesString().c_str(),
                 additionalDefines.c_str(),
                 shaders::ShaderSource<shaders::BuiltIn::Prelude, gfx::Backend::Type::OpenGL>::vertex,
                 vertexSource.c_str()});
         auto fragProg = context.createShader(
             ShaderType::Fragment,
-            {"#version 300 es\n",
+            {versionString.c_str(),
              programParameters.getDefinesString().c_str(),
              additionalDefines.c_str(),
              shaders::ShaderSource<shaders::BuiltIn::Prelude, gfx::Backend::Type::OpenGL>::fragment,
