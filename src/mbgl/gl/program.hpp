@@ -56,10 +56,10 @@ public:
             constexpr auto backend = gfx::Backend::Type::OpenGL;
 
 #if !defined(__APPLE__)
-            static constexpr std::string versionString = "#version 300 es\n";
+            static const std::string versionString = "#version 300 es\n";
 #else
             // OpenGL ES 3.0 is not available using an OpenGL core profile on macOS
-            static constexpr std::string versionString = "#version 410\n";
+            static const std::string versionString = "#version 410\n";
 #endif
 
             // Compile the shader
