@@ -6,7 +6,7 @@
 namespace mbgl {
 namespace platform {
 
-#ifndef NDEBUG
+#if !defined(NDEBUG) || defined(MLN_GL_CHECK_ERRORS)
 void glCheckError(const char* cmd, const char* file, int line) {
     if (GLenum err = glGetError()) {
         Log::Warning(Event::OpenGL,

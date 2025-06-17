@@ -6,7 +6,7 @@
 // Pointers to OpenGL ES functions. They must be
 // initialized by the platform at linking time.
 
-#ifndef NDEBUG
+#if !defined(NDEBUG) || defined(MLN_GL_CHECK_ERRORS)
 #define MBGL_CHECK_ERROR(cmd)                                           \
     ([&]() {                                                            \
         struct __MBGL_CHECK_ERROR {                                     \
@@ -551,7 +551,7 @@ extern void (*const glTexStorage3D)(GLenum, GLsizei, GLenum, GLsizei, GLsizei, G
 /// Pointer to glGetInternalformativ OpenGL function.
 extern void (*const glGetInternalformativ)(GLenum, GLenum, GLenum, GLsizei, GLint*);
 
-#ifndef NDEBUG
+#if !defined(NDEBUG) || defined(MLN_GL_CHECK_ERRORS)
 /// Check for GL errors and print on the console.
 void glCheckError(const char* cmd, const char* file, int line);
 #endif
