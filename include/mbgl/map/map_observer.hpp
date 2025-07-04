@@ -54,6 +54,7 @@ public:
     virtual void onCameraWillChange(CameraChangeMode) {}
     virtual void onCameraIsChanging() {}
     virtual void onCameraDidChange(CameraChangeMode) {}
+    virtual void onWillStartParsingStyle(std::string& json) {}
     virtual void onWillStartLoadingMap() {}
     virtual void onDidFinishLoadingMap() {}
     virtual void onDidFailLoadingMap(MapLoadError, const std::string&) {}

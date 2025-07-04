@@ -82,7 +82,11 @@ void Style::Impl::loadURL(const std::string& url_) {
 void Style::Impl::parse(const std::string& json_) {
     Parser parser;
 
-    if (auto error = parser.parse(json_)) {
+    json = json_;
+
+    observer->onStyleParsing(json);
+
+    if (auto error = parser.parse(json)) {
         std::string message = "Failed to parse style: " + util::toString(error);
         Log::Error(Event::ParseStyle, message.c_str());
         observer->onStyleError(std::make_exception_ptr(util::StyleParseException(message)));
@@ -92,7 +96,6 @@ void Style::Impl::parse(const std::string& json_) {
 
     mutated = false;
     loaded = false;
-    json = json_;
 
     sources.clear();
     layers.clear();

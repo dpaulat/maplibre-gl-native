@@ -40,6 +40,7 @@ public:
     void onUpdate() final;
     void onStyleLoading() final;
     void onStyleLoaded() final;
+    void onStyleParsing(std::string& json) final;
     void onStyleError(std::exception_ptr) final;
     void onSpriteLoaded(const std::optional<style::Sprite>&) final;
     void onSpriteError(const std::optional<style::Sprite>&, std::exception_ptr) final;

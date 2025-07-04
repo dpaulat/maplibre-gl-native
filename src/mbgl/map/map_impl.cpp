@@ -124,6 +124,10 @@ void Map::Impl::onStyleLoaded() {
 #endif
 }
 
+void Map::Impl::onStyleParsing(std::string& json) {
+    observer.onWillStartParsingStyle(json);
+}
+
 void Map::Impl::onStyleError(std::exception_ptr error) {
     MapLoadError type;
     std::string description;
